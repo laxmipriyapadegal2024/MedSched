@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href='https://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'>
+    <style>
+        *, *:before, *:after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #3674B5, #A1E3F9);
+        }
+
+        .container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .form-image {
+            flex: 1;
+            background: linear-gradient(45deg, #578FCA, #3674B5);
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+            pointer-events: none;
+        }
+
+        .form-image h2 {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .form-image p {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            opacity: 0.9;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .form-content {
+            flex: 1;
+            padding: 60px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .form-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .form-content::-webkit-scrollbar-thumb {
+            background: #3674B5;
+            border-radius: 4px;
+        }
+
+        h1 {
+            color: #3674B5;
+            font-size: 3rem;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .form-wrapper {
+            max-width: 600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            color: #578FCA;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #A1E3F9;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        input:focus {
+            border-color: #3674B5;
+            box-shadow: 0 0 15px rgba(54, 116, 181, 0.2);
+            outline: none;
+            background: white;
+        }
+
+        button {
+            width: 100%;
+            padding: 18px;
+            background: #3674B5;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background: #578FCA;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(54, 116, 181, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .links {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .links a {
+            color: #3674B5;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: all 0.3s ease;
+        }
+
+        .links a:hover {
+            color: #578FCA;
+            text-decoration: underline;
+        }
+
+        .divider {
+            color: #A1E3F9;
+            margin: 0 10px;
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+                height: auto;
+                min-height: 100vh;
+            }
+            
+            .form-image {
+                padding: 40px 20px;
+            }
+            
+            .form-content {
+                padding: 40px 20px;
+            }
+
+            .form-image h2 {
+                font-size: 2.5rem;
+            }
+
+            .form-image p {
+                font-size: 1.1rem;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .links {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .links a {
+                display: block;
+                margin: 10px 0;
+            }
+
+            .divider {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-image">
+            <h2>Welcome Back!</h2>
+            <p>We're excited to see you again. Login to access your personalized experience, manage your account, and continue your journey with us.</p>
+        </div>
+        
+        <div class="form-content">
+            <form action="index.html" method="post" id="login-form">
+                <h1>Login</h1>
+                
+                <div class="form-wrapper">
+                    <div class="input-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="user_email" placeholder="Enter your email" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="user_password" placeholder="Enter your password" required>
+                    </div>
+                    
+                    <button type="submit">Login</button>
+                    
+                    <div class="links">
+                        <a href="/forgotpass.html" id="forgot-password">Forgot Password?</a>
+                        <span class="divider">|</span>
+                        <a href="/signup.html">Not a user? Sign Up</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('login-form');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Here you would typically handle the login logic
+            // For demo purposes, just show an alert
+            alert('Login successful!');
+        });
+
+        // Add focus effects
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.classList.add('focused');
+            });
+            
+            input.addEventListener('blur', () => {
+                if (!input.value) {
+                    input.parentElement.classList.remove('focused');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

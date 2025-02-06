@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Form</title>
+    <link href='https://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'>
+    <style>
+        *, *:before, *:after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #3674B5, #A1E3F9);
+        }
+
+        .container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .form-image {
+            flex: 1;
+            background: linear-gradient(45deg, #578FCA, #3674B5);
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+            pointer-events: none;
+        }
+
+        .form-image h2 {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .form-image p {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            opacity: 0.9;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .form-content {
+            flex: 1;
+            padding: 60px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .form-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .form-content::-webkit-scrollbar-thumb {
+            background: #3674B5;
+            border-radius: 4px;
+        }
+
+        h1 {
+            color: #3674B5;
+            font-size: 3rem;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        fieldset {
+            border: none;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%;
+        }
+
+        legend {
+            color: #578FCA;
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            color: #578FCA;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #A1E3F9;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        input:focus {
+            border-color: #3674B5;
+            box-shadow: 0 0 15px rgba(54, 116, 181, 0.2);
+            outline: none;
+            background: white;
+        }
+
+        .password-strength {
+            height: 6px;
+            background: #eee;
+            margin-top: 10px;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .password-strength-bar {
+            height: 100%;
+            width: 0;
+            background: #3674B5;
+            transition: width 0.3s ease;
+        }
+
+        button {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 18px;
+            background: #3674B5;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            display: block;
+        }
+
+        button:hover {
+            background: #578FCA;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(54, 116, 181, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .input-group input:not(:placeholder-shown) + label {
+            color: #3674B5;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .error {
+            animation: shake 0.5s ease-in-out;
+            border-color: #ff4444 !important;
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+                height: auto;
+                min-height: 100vh;
+            }
+            
+            .form-image {
+                padding: 40px 20px;
+            }
+            
+            .form-content {
+                padding: 40px 20px;
+            }
+
+            .form-image h2 {
+                font-size: 2.5rem;
+            }
+
+            .form-image p {
+                font-size: 1.1rem;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-image">
+            <h2>Welcome to MedSched</h2>
+            <p>your one-stop solution for seamless doctor scheduling and patient appointments. Easily book consultations, access e-prescriptions, and schedule blood tests with just a few clicks. Healthcare made simple and efficient for both doctors and patients!</p>
+        </div>
+        
+        <div class="form-content">
+            <form action="index.html" method="post" id="signup-form">
+                <h1>Create Account</h1>
+                
+                <fieldset>
+                    <legend>Personal Information</legend>
+                    
+                    <div class="input-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="user_name" placeholder="Enter your full name" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="mail">Email Address</label>
+                        <input type="email" id="mail" name="user_email" placeholder="Enter your email" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="password">Create Password</label>
+                        <input type="password" id="password" name="user_password" placeholder="Create a strong password" required>
+                        <div class="password-strength">
+                            <div class="password-strength-bar"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="confirm-password">Confirm Password</label>
+                        <input type="password" id="confirm-password" name="confirm_password" placeholder="Confirm your password" required>
+                    </div>
+                </fieldset>
+                
+                <button type="submit">Create Account</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('signup-form');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirm-password');
+        const strengthBar = document.querySelector('.password-strength-bar');
+
+        // Password strength indicator
+        passwordInput.addEventListener('input', (e) => {
+            const password = e.target.value;
+            let strength = 0;
+            
+            if(password.length >= 8) strength += 25;
+            if(password.match(/[A-Z]/)) strength += 25;
+            if(password.match(/[0-9]/)) strength += 25;
+            if(password.match(/[^A-Za-z0-9]/)) strength += 25;
+            
+            strengthBar.style.width = strength + '%';
+            strengthBar.style.background = 
+                strength <= 25 ? '#ff4444' :
+                strength <= 50 ? '#ffbb33' :
+                strength <= 75 ? '#00C851' :
+                '#007E33';
+        });
+
+        // Password confirmation check
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            if(passwordInput.value !== confirmPasswordInput.value) {
+                confirmPasswordInput.classList.add('error');
+                setTimeout(() => {
+                    confirmPasswordInput.classList.remove('error');
+                }, 500);
+                return;
+            }
+            
+            // Here you would typically submit the form
+            alert('Account created successfully!');
+        });
+    </script>
+</body>
+</html>

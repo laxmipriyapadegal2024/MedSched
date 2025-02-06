@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicine Order Page</title>
+    <style>
+        /* Previous styles remain the same */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: white;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-bottom: 100px; /* Space for fixed cart summary */
+        }
+
+        header {
+            background-color: #578FCA;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .medicines-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .medicine-card {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border: 1px solid #A1E3F9;
+        }
+
+        .medicine-card h3 {
+            color: #578FCA;
+            margin-bottom: 10px;
+        }
+
+        .medicine-info {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            color: #578FCA;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .quantity-input {
+            width: 60px;
+            padding: 5px;
+            margin-right: 10px;
+            border: 1px solid #A1E3F9;
+            border-radius: 4px;
+        }
+
+        .add-to-cart {
+            background-color: #578FCA;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background-color: #A1E3F9;
+            color: #578FCA;
+        }
+
+        .cart-summary {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            border-top: 2px solid #A1E3F9;
+            z-index: 1000;
+        }
+
+        .cart-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-items {
+            flex: 1;
+            margin-right: 20px;
+            max-height: 100px;
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #A1E3F9;
+        }
+
+        .cart-total {
+            font-weight: bold;
+            color: #578FCA;
+            margin-right: 20px;
+        }
+
+        .place-order {
+            background-color: #578FCA;
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 1.1em;
+        }
+
+        .place-order:hover {
+            background-color: #A1E3F9;
+            color: #578FCA;
+        }
+
+        .success-message {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #578FCA;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid #A1E3F9;
+            z-index: 1001;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Medicine Order Page</h1>
+        </header>
+
+        <div class="medicines-grid">
+            <!-- Extended list of medicines -->
+            <div class="medicine-card">
+                <h3>Paracetamol</h3>
+                <p class="medicine-info">500mg tablets - Fever & Pain Relief</p>
+                <p class="price">₹25.00</p>
+                <input type="number" min="1" value="1" class="quantity-input">
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="medicine-card">
+                <h3>Aspirin</h3>
+                <p class="medicine-info">300mg tablets - Pain Relief</p>
+                <p class="price">₹45.00</p>
+                <input type="number" min="1" value="1" class="quantity-input">
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="medicine-card">
+                <h3>Combiflam</h3>
+                <p class="medicine-info">Pain Relief & Anti-inflammatory</p>
+                <p class="price">₹52.50</p>
+                <input type="number" min="1" value="1" class="quantity-input">
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="medicine-card">
+                <h3>Crocin</h3>
+                <p class="medicine-info">500mg - Fever & Pain Relief</p>
+                <p class="price">₹30.00</p>
+                <input type="number" min="1" value="1" class="quantity-input">
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="medicine-card">
+                <h3>Allegra</h3>
+                <p class="medicine-info">120mg - Allergy Relief</p>
+                <p class="price">₹165.00</p>
+                <input type="number" min="1" value="1" class="quantity-input">
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="medicine-card">
+                <h3>Cetrizine</h3>
+                <p class="medicine-info">10mg - Allergy Relief</p>
+                <p class="price">₹35.00</p>
+                <input type="number" min="1" value="1" class="quantity-input">
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="medicine-card">
+                <h3>Azithromycin</h3>
+                <p class="medicine-info">500mg - Antibiotic</p>
+                <p class="price">₹120.00</p>
+                <input type="number" min="1" value="1" class="quantity-input">
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="medicine-card">
+                <h3>Omeprazole</h3>
+                <p class="medicine-info">20mg - Acid Reflux</p>
+                <p class="price">₹85.00</p>
+                <input type="number" min="1" value="1" class="quantity-input">
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="medicine-card">
+                <h3>Pantoprazole</h3>
+                <p class="medicine-info">40mg - Acid Reflux</p>
+                <p class="price">₹95.00</p>
+                <input type="number" min="1" value="1" class="quantity-input">
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="medicine-card">
+                <h3>Metformin</h3>
+                <p class="medicine-info">500mg - Diabetes</p>
+                <p class="price">₹45.00</p>
+                <input type="number" min="1" value="1" class="quantity-input">
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="medicine-card">
+                <h3>Amlodipine</h3>
+                <p class="medicine-info">5mg - Blood Pressure</p>
+                <p class="price">₹55.00</p>
+                <input type="number" min="1" value="1" class="quantity-input">
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="medicine-card">
+                <h3>Metoprolol</h3>
+                <p class="medicine-info">25mg - Blood Pressure</p>
+                <p class="price">₹75.00</p>
+                <input type="number" min="1" value="1" class="quantity-input">
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="medicine-card">
+                <h3>Montelukast</h3>
+                <p class="medicine-info">10mg - Asthma & Allergy</p>
+                <p class="price">₹145.00</p>
+                <input type="number" min="1" value="1" class="quantity-input">
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="medicine-card">
+                <h3>Levothyroxine</h3>
+                <p class="medicine-info">50mcg - Thyroid</p>
+                <p class="price">₹120.00</p>
+                <input type="number" min="1" value="1" class="quantity-input">
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="medicine-card">
+                <h3>Vitamin D3</h3>
+                <p class="medicine-info">60000 IU - Supplement</p>
+                <p class="price">₹95.00</p>
+                <input type="number" min="1" value="1" class="quantity-input">
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="medicine-card">
+                <h3>B-Complex</h3>
+                <p class="medicine-info">Vitamin B Supplement</p>
+                <p class="price">₹65.00</p>
+                <input type="number" min="1" value="1" class="quantity-input">
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="medicine-card">
+                <h3>Calcium + Vitamin D3</h3>
+                <p class="medicine-info">500mg/500IU - Supplement</p>
+                <p class="price">₹130.00</p>
+                <input type="number" min="1" value="1" class="quantity-input">
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="medicine-card">
+                <h3>Folic Acid</h3>
+                <p class="medicine-info">5mg - Supplement</p>
+                <p class="price">₹35.00</p>
+                <input type="number" min="1" value="1" class="quantity-input">
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="medicine-card">
+                <h3>Diclofenac</h3>
+                <p class="medicine-info">50mg - Pain Relief</p>
+                <p class="price">₹40.00</p>
+                <input type="number" min="1" value="1" class="quantity-input">
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="medicine-card">
+                <h3>Ibuprofen</h3>
+                <p class="medicine-info">400mg - Pain Relief</p>
+                <p class="price">₹45.00</p>
+                <input type="number" min="1" value="1" class="quantity-input">
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="medicine-card">
+                <h3>Ranitidine</h3>
+                <p class="medicine-info">150mg - Acid Reflux</p>
+                <p class="price">₹75.00</p>
+                <input type="number" min="1" value="1" class="quantity-input">
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="medicine-card">
+                <h3>Domperidone</h3>
+                <p class="medicine-info">10mg - Nausea Relief</p>
+                <p class="price">₹55.00</p>
+                <input type="number" min="1" value="1" class="quantity-input">
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="medicine-card">
+                <h3>Ondansetron</h3>
+                <p class="medicine-info">4mg - Anti-nausea</p>
+                <p class="price">₹85.00</p>
+                <input type="number" min="1" value="1" class="quantity-input">
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="medicine-card">
+                <h3>Amoxicillin</h3>
+                <p class="medicine-info">500mg - Antibiotic</p>
+                <p class="price">₹95.00</p>
+                <input type="number" min="1" value="1" class="quantity-input">
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="medicine-card">
+                <h3>Ciprofloxacin</h3>
+                <p class="medicine-info">500mg - Antibiotic</p>
+                <p class="price">₹110.00</p>
+                <input type="number" min="1" value="1" class="quantity-input">
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="cart">
+                <h2>Shopping Cart</h2>
+                <div class="cart-items">
+                    <!-- Cart items will be added here dynamically -->
+                </div>
+                <button class="place-order">Place Order</button>
+            </div>
+        </div>
+    
+        <div class="success-message">
+            Order placed successfully!
+        </div>
+    
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const cart = {};
+                const cartItems = document.querySelector('.cart-items');
+                
+                // Add to cart functionality
+                document.querySelectorAll('.add-to-cart').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const card = this.closest('.medicine-card');
+                        const name = card.querySelector('h3').textContent;
+                        const price = parseFloat(card.querySelector('.price').textContent.replace('₹', ''));
+                        const quantity = parseInt(card.querySelector('.quantity-input').value);
+    
+                        if (cart[name]) {
+                            cart[name].quantity += quantity;
+                        } else {
+                            cart[name] = {
+                                price: price,
+                                quantity: quantity
+                            };
+                        }
+    
+                        updateCartDisplay();
+                    });
+                });
+    
+                // Update cart display
+                function updateCartDisplay() {
+                    cartItems.innerHTML = '';
+                    for (const [name, details] of Object.entries(cart)) {
+                        const item = document.createElement('div');
+                        item.className = 'cart-item';
+                        item.innerHTML = `
+                            <span>${name} x${details.quantity}</span>
+                            <span>₹${(details.price * details.quantity).toFixed(2)}</span>
+                        `;
+                        cartItems.appendChild(item);
+                    }
+                }
+    
+                // Place order functionality
+                document.querySelector('.place-order').addEventListener('click', function() {
+                    if (Object.keys(cart).length === 0) {
+                        alert('Please add items to cart first');
+                        return;
+                    }
+    
+                    const successMessage = document.querySelector('.success-message');
+                    successMessage.style.display = 'block';
+                    
+                    // Clear cart
+                    Object.keys(cart).forEach(key => delete cart[key]);
+                    updateCartDisplay();
+    
+                    // Hide success message after 3 seconds
+                    setTimeout(() => {
+                        successMessage.style.display = 'none';
+                    }, 3000);
+                });
+            });
+        </script>
+    </body>
+    </html>
